@@ -2,11 +2,13 @@ extern crate iron;
 extern crate logger;
 extern crate env_logger;
 extern crate router;
+#[macro_use] extern crate tera;
 
 use iron::prelude::*;
 use iron::status;
 use logger::Logger;
 use router::Router;
+use tera::Tera;
 
 fn main() {
     env_logger::init().unwrap();
@@ -14,9 +16,10 @@ fn main() {
     let (logger_before, logger_after) = Logger::new(None);
 
     let mut router = Router::new();
-    router.get("/", handler, "index");
-    router.get("/:query", handler, "query");
+    router.get("/", handler_index, "index");
+    router.get("/posts/:id", handler_show, "show");
 
+    let tera = compile_templates!("templates/**/*");
 
     let mut chain = Chain::new(router);
 
@@ -29,7 +32,10 @@ fn main() {
     }
 }
 
-fn handler(req: &mut Request) -> IronResult<Response> {
-    let ref query = req.extensions.get::<Router>().unwrap().find("query").unwrap_or("home");
-    Ok(Response::with((status::Ok, *query)))
+fn handler_index(_: &mut Request) -> IronResult<Response> {
+    Ok(Response::with((status::Ok, "Index")))
+}
+
+fn handler_show(_: &mut Request) -> IronResult<Response> {
+    Ok(Response::with((status::Ok, "Show")))
 }
