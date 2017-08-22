@@ -1,0 +1,10 @@
+[package]
+name = "blog"
+version = "0.1.0"
+authors = ["Dimas J. Taniawan <dimas.taniawan@bocistudio.com>"]
+
+[dependencies]
+iron = "*"
+router  = "*"
+logger = "*"
+env_logger = "*"

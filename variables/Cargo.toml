@@ -1,0 +1,6 @@
+[package]
+name = "variables"
+version = "0.1.0"
+authors = ["Dimas J. Taniawan <dimas.taniawan@bocistudio.com>"]
+
+[dependencies]

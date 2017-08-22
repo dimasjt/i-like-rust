@@ -1,0 +1,6 @@
+[package]
+name = "struct_data"
+version = "0.1.0"
+authors = ["Dimas J. Taniawan <dimas.taniawan@bocistudio.com>"]
+
+[dependencies]
